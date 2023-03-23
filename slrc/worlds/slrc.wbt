@@ -1,0 +1,67 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/GalvanizedMetal.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.37436050298611956 0.23532751680683753 -0.8969254002633145 2.114804735569382
+  position 1.33094254303726 2.9299266276380553 3.3812589323913373
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  rotation 0 0 1 4.692820414042842e-06
+  floorSize 2 2
+}
+Robot {
+  translation 0 0 0.17
+  rotation 0 1 0 0
+  children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint Solid {
+        translation 0.1 0.1 0
+        rotation 0 1 0 1.57
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.05
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics DEF physics_wh Physics {
+        }
+      }
+    }
+    DEF body Shape {
+      appearance GalvanizedMetal {
+      }
+      geometry Box {
+        size 0.2 0.3 0.15
+      }
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+  }
+}
+Wall {
+  translation -0.1 -0.4 0
+  size 0.01 0.1 0.1
+}

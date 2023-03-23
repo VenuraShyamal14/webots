@@ -1,0 +1,295 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.4629943248666606 -0.14100269533926355 -0.8750739940418342 3.662479323878591
+  position 2.1551984721035597 -1.1986136275477555 3.31210554641177
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 1.5 1.5
+}
+DEF box1 Solid {
+  translation 0.580000036545565 0.590000036545565 0.04960762569416159
+  rotation 0.7071067809074851 -0.7071067814656099 -9.090077491850879e-10 9.89359025189655e-08
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+  }
+  linearVelocity 2.717011146780971e-08 2.7170111528954126e-08 -2.012281191809963e-07
+  angularVelocity -5.433916775210452e-07 5.433916769881382e-07 2.557603278754028e-17
+}
+DEF box2 Solid {
+  translation 0.5800000365455651 -0.6199999634544349 0.049607582870564194
+  rotation 0.7071067807351208 -0.7071067816379744 -4.0276393053649347e-10 9.893590255514085e-08
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+  }
+  linearVelocity 2.7170111604910727e-08 2.7170111617606427e-08 1.3415204352895685e-07
+  angularVelocity -5.43391679919126e-07 5.433916788533117e-07 3.0002380801004344e-17
+}
+DEF box3 Solid {
+  translation -0.619999963454435 0.590000036545565 0.04960762569416159
+  rotation 0.7071067809074851 -0.7071067814656099 -9.090077491850879e-10 9.89359025189655e-08
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+  physics Physics {
+  }
+  linearVelocity 2.717011146780971e-08 2.7170111528954126e-08 -2.012281191809963e-07
+  angularVelocity -5.433916775210452e-07 5.433916769881382e-07 2.557603278754028e-17
+}
+DEF robot Robot {
+  translation -0.643302 -0.621775 0.0254215
+  rotation -0.17198477452919475 -0.9837642820880524 0.05127450261017339 0.00015004342760136405
+  children [
+    DistanceSensor {
+      translation 0.075 0.02 0
+      rotation 0 0 1 0.5
+      children [
+        DEF distant_sensor Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ds left"
+      boundingObject USE distant_sensor
+      physics Physics {
+      }
+    }
+    DEF ds DistanceSensor {
+      translation 0.075 -0.02 0
+      rotation 0 0 1 -0.5
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ds right"
+      boundingObject USE distant_sensor
+      physics Physics {
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3.5839726640128293
+        axis 0 1 0
+        anchor 0.05 0.056 -0.007
+      }
+      device [
+        DEF front_left_wheel RotationalMotor {
+          name "front_left_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation 0.05 0.056 -0.007
+        rotation -0.15691757713242638 0.6988765507178301 -0.6978169106890698 3.45335443067699
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics DEF physics_wheel Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3.583874390302339
+        axis 0 1 0
+        anchor 0.05 -0.056 -0.007
+      }
+      device [
+        DEF front_right_wheel RotationalMotor {
+          name "front_right_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation 0.04999799142773531 -0.05599999334029788 -0.007004237312064193
+        rotation -0.15693767159244779 0.698622332184514 -0.6980669052520766 3.4531722937880995
+        children [
+          USE wheel
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics USE physics_wheel
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3.583874978283699
+        axis 0 1 0
+        anchor -0.05 0.056 -0.007
+      }
+      device [
+        DEF left_back_wheel RotationalMotor {
+          name "left_back_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation -0.05000201795428722 0.05600000146246475 -0.007004265212720772
+        rotation -0.1569379929345501 0.6986225580852689 -0.6980666069280714 3.453173151665015
+        children [
+          USE wheel
+        ]
+        name "solid(2)"
+        boundingObject USE wheel
+        physics USE physics_wheel
+      }
+    }
+    DEF hing HingeJoint {
+      jointParameters HingeJointParameters {
+        position 3.5838740394066284
+        axis 0 1 0
+        anchor -0.05 -0.056 -0.007
+      }
+      device [
+        RotationalMotor {
+          name "right_back_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation -0.050002018309270035 -0.05599999855777699 -0.007004265602331046
+        rotation -0.15693765177825358 0.6986226227304058 -0.6980666189294664 3.4531725083060194
+        children [
+          USE wheel
+        ]
+        name "solid(3)"
+        boundingObject USE wheel
+        physics USE physics_wheel
+      }
+    }
+    DEF body Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.2 0.3
+        metalness 0
+      }
+      geometry Box {
+        size 0.15 0.1 0.03
+      }
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "my_object_detection"
+}
+DEF wall Solid {
+  translation -2.552856081616499e-17 -0.4 0.049743033486285115
+  rotation 0.0037673897396378205 -0.9999865851130012 0.003554767023051292 4.90675390059558e-16
+  children [
+    DEF wall Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.7 0.1
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE wall
+  physics Physics {
+  }
+  linearVelocity 2.357384327001152e-16 -2.0820417583518917e-17 -0.00013862392398124218
+  angularVelocity 2.460672674639743e-16 4.863964003732515e-15 5.300941123727823e-18
+}
+DEF wall Solid {
+  translation 0.39983600560048055 0.38999941369930813 0.04974457425253479
+  rotation 0.0035751088791986132 -0.9999936068526795 6.964388518498224e-05 0.003279984140583962
+  children [
+    DEF wall Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.7 0.1
+      }
+    }
+  ]
+  name "solid(5)"
+  boundingObject USE wall
+  physics Physics {
+  }
+  linearVelocity 0.0005509628249114624 4.582751324221383e-06 -0.0001507576410657358
+  angularVelocity -9.165496396461698e-05 0.011019269037210901 1.6142801153846215e-07
+}
+DEF wall Solid {
+  translation -0.37999941314712177 0.38983500560245554 0.049744574252534805
+  rotation 0.001645841577014478 -0.0016341097967267541 0.9999973104417209 1.5708026118925142
+  children [
+    DEF wall Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.7 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE wall
+  physics Physics {
+  }
+  linearVelocity -4.58460647368855e-06 0.0005509628094779379 -0.00015075764106553267
+  angularVelocity -0.011019268728540555 -9.169206699576007e-05 1.6142801154398343e-07
+}
