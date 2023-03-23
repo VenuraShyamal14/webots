@@ -11,13 +11,15 @@ using namespace webots;
 int main(int argc, char **argv) {
   Robot *robot = new Robot();
   Keyboard kb;
-  DistanceSensor *ds[2];
+  DistanceSensor *ds[5];
   
-  char dsNames[2][10] = {"ds right", "ds left"};
-  for (int i = 0; i < 2; i++) {
+  char dsNames[5][20] = {"ds front right", "ds front left","ds side right", "ds side left", "ds upper"};
+  for (int i = 0; i < 5; i++) {
     ds[i] = robot->getDistanceSensor(dsNames[i]);
     ds[i]->enable(TIME_STEP);
   }
+  
+  
   //updown motor
   Motor *lr;
   lr=robot->getMotor("linear_motor");
@@ -27,6 +29,12 @@ int main(int argc, char **argv) {
  
     Motor *ra;
   ra=robot->getMotor("right_arm"); 
+  
+    Motor *fa;
+  fa=robot->getMotor("front_arm");
+  
+    Motor *ba;
+  ba=robot->getMotor("back_arm");
   
   // GPS *gp;
   // gp=robot->getGPS("global");
@@ -50,11 +58,13 @@ int main(int argc, char **argv) {
   double leftSpeed = 0.0;
   double rightSpeed = 0.0;
   double linear=0.0;
-  double linear1=0.0;
+  
   double linear2=0.0;
+  
   while (robot->step(TIME_STEP) != -1) {
     int key=kb.getKey();
     //std::cout<<key<<std::endl;
+    
     if (key==315){
     leftSpeed = 5.0;
     rightSpeed = 5.0;
@@ -71,7 +81,7 @@ int main(int argc, char **argv) {
     leftSpeed = 0.0;
     rightSpeed = 0.0;
     }
-    // std::cout<<ds[0]->getValue()<<"=Right Sensor"<<std::endl;
+     //std::cout<<ds[0]->getValue()<<"=Right Sensor"<<std::endl;
     // std::cout<<ds[1]->getValue()<<"=Left Sensor"<<std::endl;
     wheels[0]->setVelocity(leftSpeed);
     wheels[1]->setVelocity(rightSpeed);
@@ -102,6 +112,8 @@ int main(int argc, char **argv) {
     }
     la->setPosition(linear2);
     ra->setPosition(linear2);
+    fa->setPosition(linear2);
+    ba->setPosition(linear2);
   
   }
   delete robot;
