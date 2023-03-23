@@ -21,8 +21,12 @@ int main(int argc, char **argv) {
   //updown motor
   Motor *lr;
   lr=robot->getMotor("linear_motor");
-  
  
+   Motor *la;
+  la=robot->getMotor("left_arm"); 
+ 
+    Motor *ra;
+  ra=robot->getMotor("right_arm"); 
   
   // GPS *gp;
   // gp=robot->getGPS("global");
@@ -89,7 +93,16 @@ int main(int argc, char **argv) {
     }
     lr->setPosition(linear);
     
- 
+    if (key==65 && linear2<0.19){
+    linear2 += 0.005;
+    } else if (key==68 && linear2>0){
+    linear2 += -0.005;
+    }else {
+    linear2 +=0;
+    }
+    la->setPosition(linear2);
+    ra->setPosition(linear2);
+  
   }
   delete robot;
   return 0;  // EXIT_SUCCESS
