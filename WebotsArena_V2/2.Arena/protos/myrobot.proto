@@ -1,119 +1,14 @@
 #VRML_SIM R2023a utf8
 
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/Parquetry.proto"
-EXTERNPROTO "../protos/SLRC_supervisor_v1.proto"
-
-WorldInfo {
-  contactProperties [
-    ContactProperties {
-    }
-  ]
-}
-Viewpoint {
-  orientation -0.3568292294793857 -0.35885537759038416 0.8624938950297624 4.570609315357046
-  position -1.944550339068863 2.255986944295968 1.5033038175262285
-}
-TexturedBackground {
-}
-TexturedBackgroundLight {
-}
-RectangleArena {
-  translation -0.62 0 0
-  floorSize 2.7 2.7
-  floorTileSize 5 5
-  floorAppearance Parquetry {
-    type "dark strip"
-    colorOverride 0 0 0
-    textureTransform TextureTransform {
-    }
-  }
-}
-DEF box_3 Solid {
-  translation -1.73568 -1.07485 0.02499509575968443
-  rotation -0.5773059651320007 0.5774388671071757 0.5773059651320006 2.0942622106153292
-  children [
-    DEF box_3_shape Shape {
-      appearance PBRAppearance {
-        baseColor 1 0 0
-        metalness 0
-      }
-      geometry Box {
-        size 0.05 0.05 0.05
-      }
-    }
-  ]
-  name "solid(4)"
-  boundingObject USE box_3_shape
-  physics Physics {
-    density 100
-  }
-}
-DEF box_2 Solid {
-  translation 0.4800000000000835 -1.089999999999917 0.01999748902897236
-  rotation 0.1366643721632326 -0.03863625360988396 0.9898636720721811 3.193607141454199e-15
-  children [
-    DEF box_2_shape Shape {
-      appearance PBRAppearance {
-        baseColor 0 1 0
-        metalness 0
-      }
-      geometry Box {
-        size 0.04 0.04 0.04
-      }
-    }
-  ]
-  name "solid(3)"
-  boundingObject USE box_2_shape
-  physics Physics {
-    density 100
-  }
-}
-DEF box_1 Solid {
-  translation 0.185701 0.832091 0.014998940684101273
-  rotation -0.24920270873689784 0.6847985141478451 0.6847985141478453 -2.653136392205026
-  children [
-    DEF box_1_shape Shape {
-      appearance PBRAppearance {
-        baseColor 0 0 1
-        metalness 0
-      }
-      geometry Box {
-        size 0.03 0.03 0.03
-      }
-    }
-  ]
-  name "solid(2)"
-  boundingObject USE box_1_shape
-  physics Physics {
-    density 100
-  }
-}
-DEF maze Solid {
-  translation -1.93 1.32 -0.00589861
-  rotation 1 0 0 1.5708
-  scale 0.001 0.001 0.001
-  children [
-    DEF maze_shape Shape {
-      appearance PBRAppearance {
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../solid bodies/arena/webotsArena.STL"
-        ]
-      }
-      castShadows FALSE
-    }
-  ]
-}
-DEF supervisor SLRC_supervisor_v1 {
-}
-DEF robot Robot {
-  translation -1.749991430314667 1.149880004809217 0.026885602438856637
-  rotation 0.00037018360649778196 0.00031738148248323293 -0.999999881116539 1.5700000774240812
+PROTO myrobot [
+  field SFVec3f translation -1.74999 1.14988 0.0268856 # Is `Transform.translation`.
+  field SFRotation rotation 0 0 -1 1.57 # Is `Transform.rotation`.
+  field SFString controller "my_keyboad_controller"
+]
+{
+  DEF robot_01 Robot {
+  translation IS translation
+  rotation IS rotation
   children [
     InertialUnit {
       children [
@@ -545,7 +440,7 @@ DEF robot Robot {
       ]
       endPoint Solid {
         translation -0.049996568848444826 0.056000001505638594 -0.00700361956247799
-        rotation 0.5160795117958341 0.605906760466953 -0.6054245907832089 2.188086994976375
+        rotation 0.5160795117958342 0.605906760466953 -0.6054245907832088 2.188086994976375
         children [
           USE wheel
         ]
@@ -590,5 +485,6 @@ DEF robot Robot {
   boundingObject USE body
   physics Physics {
   }
-  controller "my_keyboad_controller"
+  controller IS controller
+}
 }

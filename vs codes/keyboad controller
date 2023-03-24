@@ -4,6 +4,7 @@
 #include <webots/Keyboard.hpp>
 #include <webots/GPS.hpp>
 #include <webots/InertialUnit.hpp>
+#include <webots/Camera.hpp>
 
 #define TIME_STEP 64
 using namespace webots;
@@ -11,14 +12,19 @@ using namespace webots;
 int main(int argc, char **argv) {
   Robot *robot = new Robot();
   Keyboard kb;
-  DistanceSensor *ds[5];
+  DistanceSensor *ds[6];
   
-  char dsNames[5][20] = {"ds front right", "ds front left","ds side right1", "ds side left1", "ds upper"};
-  for (int i = 0; i < 5; i++) {
+  char dsNames[6][20] = {"ds side right1","ds side right2", "ds front left","ds side left1", "ds side left2","ds front right"};
+  for (int i = 0; i < 6; i++) {
     ds[i] = robot->getDistanceSensor(dsNames[i]);
     ds[i]->enable(TIME_STEP);
   }
   
+  Camera *cam;
+cam= robot->getCamera("camera");
+cam->enable(TIME_STEP);
+cam->recognitionEnable(TIME_STEP);
+
   
   //updown motor
   Motor *lr;
