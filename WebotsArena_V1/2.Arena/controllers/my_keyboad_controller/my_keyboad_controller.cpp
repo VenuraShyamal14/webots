@@ -40,9 +40,9 @@ int main(int argc, char **argv) {
    gp=robot->getGPS("gps");
    gp-> enable(TIME_STEP);
   
-  // InertialUnit *iu;
-  // iu=robot->getInertialUnit("imu");
-  // iu-> enable(TIME_STEP);
+  InertialUnit *iu;
+   iu=robot->getInertialUnit("inertial unit");
+   iu-> enable(TIME_STEP);
 
 
   
@@ -91,9 +91,10 @@ int main(int argc, char **argv) {
     std::cout<<"Y : "<<gp->getValues()[1]<<std::endl;
      std::cout<<"Z : "<<gp->getValues()[2]<<std::endl;
      std::cout<<"########################"<<std::endl;
-    // std::cout<<"Angle X : "<<iu->getRollPitchYaw()[0]<<std::endl;
-    // std::cout<<"Angle Y : "<<iu->getRollPitchYaw()[1]<<std::endl;
-    // std::cout<<"Angle Z : "<<iu->getRollPitchYaw()[2]<<std::endl;
+    std::cout<<"Angle X : "<<iu->getRollPitchYaw()[0]<<std::endl;
+     std::cout<<"Angle Y : "<<iu->getRollPitchYaw()[1]<<std::endl;
+     std::cout<<"Angle Z : "<<iu->getRollPitchYaw()[2]<<std::endl;
+     std::cout<<"########################"<<std::endl;
     if (key==87 && linear<0.19){
     linear += 0.005;
     } else if (key==83 && linear>0){
